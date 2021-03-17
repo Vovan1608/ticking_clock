@@ -19,3 +19,78 @@ const civilianHours = (clockTime) => ({
   ...clockTime,
   hours: clockTime.hours > 12 ? clockTime.hours - 12 : clockTime.hours,
 });
+
+// получает объект показания часов и добавляет к нему время суток,
+// AM или PM.
+const appendAMPM = (clockTime) => ({
+  ...clockTime,
+  ampm: clockTime.hours >= 12 ? "PM" : "AM",
+});
+
+// получает функцию цели target и возвращает функцию, которая будет
+// отправлять время в адрес цели.
+const display = (target) => (time) => target(time);
+
+// получает шаблонную строку и использует ее для возвращения
+// показания времени, отформатированного по критериям, заданным строкой.
+const formatClock = (format) => (time) =>
+  format
+    .replace("hh", time.hours)
+    .replace("mm", time.minutes)
+    .replace("ss", time.seconds)
+    .replace("tt", time.ampm);
+
+// получает в качестве аргумента ключ объекта и ставит нуль впе-
+// реди значения, хранящегося под этим ключом объекта. Функция получает ключ
+// к указанному полю и ставит перед значениями нуль, если значение меньше 10.
+const prependZero = (key) => (clockTime) => ({
+  ...clockTime,
+  [key]: clockTime[key] < 10 ? "0" + clockTime[key] : clockTime[key],
+});
+
+// отдельная функция, получающая в качестве аргумента
+// показание времени и преобразующая его в формат гражданского
+// времени с помощью обеих форм этого времени.
+const convertToCivilianTime = (clockTime) =>
+  compose(appendAMPM, civilianHours)(clockTime);
+
+//отдельная функция, получающая в качестве аргумента показание
+// времени и обеспечивающая отображение часов, минут и секунд парой цифр,
+// подставляя для этого ноль, где необходимо.
+const doubleDigits = (civilianTime) =>
+  compose(
+    prependZero("hours"),
+    prependZero("minutes"),
+    prependZero("seconds")
+  )(civilianTime);
+
+// запускает часы, устанавливая интервал, вызывающий функцию
+// обратного вызова каждую секунду. Функция обратного вызова представляет
+// собой композицию из всех наших функций. Каждую секунду консоль очищается,
+// получается текущее время, показание которого проходит преобразование,
+// перевод в гражданский формат, форматирование и отображение
+const startTicking = () =>
+  setInterval(
+    compose(
+      clear,
+      getCurrentTime,
+      serializeClockTime,
+      convertToCivilianTime,
+      doubleDigits,
+      formatClock("hh:mm:ss tt"),
+      display(log)
+    ),
+    oneSecond()
+  );
+
+const compose = (...fns) => (arg) =>
+  fns.reduce((composed, f) => f(composed), arg);
+
+const add = document.querySelector(".add");
+const el = document.createElement("div");
+
+el.innerText = "time";
+el.style =
+  "background: rgb(97, 218, 251); font-size: 96px; margin: 0 auto; text-align: center";
+
+add.appendChild(el);
