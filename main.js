@@ -2,7 +2,9 @@
 
 const oneSecond = () => 1000;
 const getCurrentTime = () => new Date();
-const clear = () => console.clear();
+const clear = () => {
+  console.clear();
+};
 const log = (message) => console.log(message);
 
 // получает объект времени и возвращает объект для
@@ -29,19 +31,7 @@ const appendAMPM = (clockTime) => ({
 
 // получает функцию цели target и возвращает функцию, которая будет
 // отправлять время в адрес цели.
-const display = (target) => (time) => {
-  target(time);
-
-  const container = document.querySelector(".add");
-  const element = document.createElement("div");
-
-  element.innerText = time;
-  element.style =
-    "background: rgb(97, 218, 251); font-size: 96px; margin: 0 auto; text-align: center";
-
-  container.append(element);
-  // container.remove();
-};
+const display = (target) => (time) => target(time);
 
 // получает шаблонную строку и использует ее для возвращения
 // показания времени, отформатированного по критериям, заданным строкой.
