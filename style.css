@@ -28,4 +28,14 @@ button {
   color: #fff;
   padding: 8px 16px;
   font-size: 16px;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #1d49aa;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
 }
