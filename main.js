@@ -112,12 +112,16 @@ let timerId;
 // запустить часы
 const clockStart = () => {
   timerId = setInterval(update, oneSecond());
-  update(); // (*)
+  update();
 }
 
+// остановить часы
 const clockStop = () => {
   clearInterval(timerId);
   timerId = null;
 }
+
+document.querySelector(".start").addEventListener("click", clockStart);
+document.querySelector(".stop").addEventListener("click", clockStop);
 
 clockStart();
