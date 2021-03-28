@@ -5,7 +5,9 @@ const getCurrentTime = () => new Date();
 const clear = () => {
   console.clear();
 };
+// функция выводит время в консоль
 const log = (message) => console.log(message);
+// функция выводит время на фронт
 const clock = (message) => {
   const clock = document.getElementById('clock');
   clock.innerText = message;
@@ -93,7 +95,7 @@ const startTicking = () =>
 const compose = (...fns) => (arg) =>
   fns.reduce((composed, f) => f(composed), arg);
 
-startTicking();
+//  startTicking();
 
 const update = () => 
   setInterval(

@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #61dafb;
+  text-align: center;
+}
+
+#clock {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 36px;
+  border: 2px solid #000;
+  border-radius: 7px;
+  background-color: #f1f5f8;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
+}
