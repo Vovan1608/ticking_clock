@@ -13,6 +13,10 @@ const clock = (message) => {
   clock.innerText = message;
 }
 
+// функция запуска по очереди
+const compose = (...fns) => (arg) =>
+  fns.reduce((composed, f) => f(composed), arg);
+
 // получает объект времени и возвращает объект для
 // показания часов, содержащих часы, минуты и секунды
 const serializeClockTime = (date) => ({
@@ -92,21 +96,28 @@ const startTicking = () =>
     oneSecond()
   );
 
-// функция запуска по очереди
-const compose = (...fns) => (arg) =>
-  fns.reduce((composed, f) => f(composed), arg);
-
+// тоже самое только на фронт
 const update = () =>
-  setInterval(
-    compose(
-      getCurrentTime,
-      serializeClockTime,
-      convertToCivilianTime,
-      doubleDigits,
-      formatClock("hh:mm:ss tt"),
-      display(clock)
-    ),
-    oneSecond()
-  );
+  compose(
+    getCurrentTime,
+    serializeClockTime,
+    convertToCivilianTime,
+    doubleDigits,
+    formatClock("hh:mm:ss tt"),
+    display(clock)
+  )();
 
-update();
+let timerId;
+
+// запустить часы
+const clockStart = () => {
+  timerId = setInterval(update, oneSecond());
+  update(); // (*)
+}
+
+const clockStop = () => {
+  clearInterval(timerId);
+  timerId = null;
+}
+
+clockStart();
