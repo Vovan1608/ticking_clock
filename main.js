@@ -6,6 +6,10 @@ const clear = () => {
   console.clear();
 };
 const log = (message) => console.log(message);
+const clock = (message) => {
+  const clock = document.getElementById('clock');
+  clock.innerText = message;
+}
 
 // получает объект времени и возвращает объект для
 // показания часов, содержащих часы, минуты и секунды
@@ -66,6 +70,7 @@ const doubleDigits = (civilianTime) =>
     prependZero("seconds")
   )(civilianTime);
 
+
 // запускает часы, устанавливая интервал, вызывающий функцию
 // обратного вызова каждую секунду. Функция обратного вызова представляет
 // собой композицию из всех наших функций. Каждую секунду консоль очищается,
@@ -89,3 +94,18 @@ const compose = (...fns) => (arg) =>
   fns.reduce((composed, f) => f(composed), arg);
 
 startTicking();
+
+const update = () => 
+  setInterval(
+    compose(
+      getCurrentTime,
+      serializeClockTime,
+      convertToCivilianTime,
+      doubleDigits,
+      formatClock("hh:mm:ss tt"),
+      display(clock)
+    ),
+    oneSecond()
+  );
+
+update();
