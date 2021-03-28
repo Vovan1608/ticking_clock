@@ -92,12 +92,11 @@ const startTicking = () =>
     oneSecond()
   );
 
+// функция запуска по очереди
 const compose = (...fns) => (arg) =>
   fns.reduce((composed, f) => f(composed), arg);
 
-//  startTicking();
-
-const update = () => 
+const update = () =>
   setInterval(
     compose(
       getCurrentTime,
