@@ -126,8 +126,7 @@ document.querySelector(".stop").addEventListener("click", clockStop);
 
 clockStart();
 
-const world_timezones =
-[
+const world_timezones = [
   'Europe/Andorra',
   'Asia/Dubai',
   'Asia/Kabul',
@@ -478,5 +477,5 @@ const world_timezones =
   'Africa/Johannesburg'
 ];
 
-const res = new Date().toLocaleString("en-US", {timeZone: "Asia/Damascus"});
+const res = new Date().toLocaleString("en-US", {timeZone: "America/Montevideo"});
 console.log(res);

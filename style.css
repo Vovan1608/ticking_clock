@@ -16,6 +16,13 @@ body {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+#timezone {
+  width: 40%;
+  margin: 20px auto;
+  font-size: 25px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
 button {
   min-width: 20%;
   cursor: pointer;
@@ -29,6 +36,7 @@ button {
   padding: 8px 16px;
   font-size: 16px;
   font-weight: 600;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 button:hover {
