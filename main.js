@@ -128,8 +128,8 @@ const select = document.getElementById("timezone");
 const createSelect = (select) => {
   for (let i = 0; i < size; i++) {
     let option = document.createElement("option");
-    option.setAttribute("value", `${world_timezones[i]}`);
-    option.innerText = world_timezones[i];
+    option.setAttribute("value", `${world_timezones()[i]}`);
+    option.innerText = world_timezones()[i];
     select.append(option);
   }
 };
