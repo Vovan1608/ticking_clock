@@ -123,19 +123,5 @@ const clockStop = () => {
 document.querySelector(".start").addEventListener("click", clockStart);
 document.querySelector(".stop").addEventListener("click", clockStop);
 
-const select = document.getElementById("timezone");
 
-const createSelect = (select) => {
-  for (let i = 0; i < size; i++) {
-    let option = document.createElement("option");
-    option.setAttribute("value", `${world_timezones()[i]}`);
-    option.innerText = world_timezones()[i];
-    select.append(option);
-  }
-};
-
-// zone.timeZone = select.value;
-
-// const res = new Date().toLocaleString("en-US", zone);
-createSelect(select);
 clockStart();
